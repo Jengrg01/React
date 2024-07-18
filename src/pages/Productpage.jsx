@@ -22,7 +22,7 @@ const Productpage = () => {
     // to send the data on Card 
      <div className="container my-3">
       <div className="row row-cols-1 row-cols-md-4 g-4">
-      {product.map(item=> <Card data={item}/>)}
+      {product.map((item,i)=> <Card data={item} key ={i}/>)}
       {/* props pathairako xa, component bata data */}
       </div>
       </div>

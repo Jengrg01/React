@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,6 +19,7 @@ const Productdetail = () => {
         const cartData = {
             id:product.id,
             title: product.title,
+            price: product.price,
             category:product.category,
             description: product.description,
             image: product.image,
@@ -50,7 +51,9 @@ const Productdetail = () => {
                 <p>{product.description}</p>
                 <p className='text-info'><strong>Category</strong> : {product.category}</p>
                 <div className="my-2">
-                     <button className='btn btn-warning' onClick={addtoCart}>Add to Cart</button>
+                    <Link to={'/cart'}><button className='btn btn-warning' onClick={addtoCart}>Add to Cart</button></Link>
+                     
+                  
                 </div>
                
             </div>
