@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { FaTrashAlt } from "react-icons/fa";
 const Cart = () => {
     const[product,setProducts]=useState([])
     useEffect(()=>{
@@ -14,6 +14,35 @@ const Cart = () => {
             setProducts([])
         }
     })
+    const increaseQty = id =>{
+        const updateProduct = product.map(item=>{
+            if (item.id ==id){
+                return {...item, quantity:item.quantity+1}
+            }
+            return item
+        })
+        setProducts(updateProduct)
+        localStorage.setItem('cartData', JSON.stringify(updateProduct))
+    }
+     const decreaseQty = id =>{
+        const updateProduct = product.map(item=>{
+            if (item.id ==id && item.quantity>1){
+                return {...item, quantity:item.quantity-1}
+            }
+            return item
+        })
+        setProducts(updateProduct)
+        localStorage.setItem('cartData', JSON.stringify(updateProduct))
+    }
+    const removeCart =(id,title)=>{
+        const confirmed = window.confirm('Are you sure you want to delete the item ?')
+        if(confirmed){
+            const cartFilter =product.filter(item =>item.id!==id)
+            setProducts(cartFilter)
+            localStorage.setItem('cartData', JSON.stringify(cartFilter))
+            toast.success(`${title} has been removed from the cart`)
+        }
+    }
   return (
     <>
     <ToastContainer theme='colored' position='top-center'/>
@@ -47,14 +76,14 @@ const Cart = () => {
                                     </strong>
                                 </div>
                                 <div className="col-3">
-                                    <button className="btn btn-primary">+</button>
+                                    <button className="btn btn-primary" onClick={()=>increaseQty(item.id)}>+</button>
                                     &nbsp;
                                     <span>{item.quantity}</span>
                                     &nbsp;
-                                    <button className="btn btn-danger">-</button>
+                                    <button className="btn btn-danger" onClick={()=>decreaseQty(item.id)}>-</button>
                                 </div>
                                 <div className="col-1">
-                                    <button className="btn btn-danger">Delete</button>
+                                    <button className="btn btn-danger" onClick={()=>removeCart(item.id,item.title)}><FaTrashAlt/></button>
                                 </div>
                             </div>
                            
@@ -71,7 +100,7 @@ const Cart = () => {
                 <h5 className="text-center">Cart Summary</h5>
                 <hr />
                 <p><strong>Unit : </strong>{product.reduce((ac, item) => ac+Number(item.quantity), 0)}</p>
-                <p><strong>Total : </strong>${product.reduce((ac, item) => ac+Number(item.quantity*item.price), 0)}</p>
+                <p><strong>Total : </strong>${product.reduce((ac, item) => ac+ item.quantity*item.price, 0).toFixed(2)}</p>
                 <div className="mt-2">
                     <button className="btn btn-warning">Check out</button>
                 </div>
