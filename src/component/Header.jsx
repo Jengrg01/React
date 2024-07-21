@@ -23,7 +23,10 @@ const Header = () => {
 
         <div className="text-end">
           <button type="button" className="btn btn-outline-light me-2">Login</button>
-          <button type="button" className="btn btn-warning">Sign-up</button>
+          <Link to={'/register'}>
+           <button type="button" className="btn btn-warning">Sign-up</button>
+          </Link>
+         
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ import Homepage from './pages/Homepage'
 import Productpage from './pages/Productpage'
 import Productdetail from './pages/Productdetail'
 import Cart from './pages/Cart'
+import Register from './pages/Register'
 
 const Myroute = () => {
   return (
@@ -23,6 +24,7 @@ const Myroute = () => {
              <Route path='/product' element={<Productpage/>}/>  
               <Route path='/productdetails/:productId' element={<Productdetail/>}/>  
               <Route path = '/cart' element = {<Cart/>}/>
+              <Route path = '/register' element = {<Register/>}/>
             </Route>  
         </Routes>
     </Router>
