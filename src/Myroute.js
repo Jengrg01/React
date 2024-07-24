@@ -11,27 +11,32 @@ import Productdetail from './pages/Productdetail'
 import Cart from './pages/Cart'
 import Register from './pages/Register'
 import Show from './context/Show'
+import Cartitem from './redux/Cartitem'
 
 const Myroute = () => {
   return (
     <>
-    <Router>
+      <Router>
         <Routes>
-            {/* <Route path ='/' element = {<First context_content ='First'/>}/>
+          {/* <Route path ='/' element = {<First context_content ='First'/>}/>
             <Route path ='/second' element = {<Second button_content ='Second'/>}/> */}
-            {/* Layout needs to wrap the pages so layout bitra pages haru ko routes rakhnu */}
-            <Route path='/' element={<Layout/>}>
-             <Route index element={<Homepage/>}/>
-             <Route path='/product' element={<Productpage/>}/>  
-              <Route path='/productdetails/:productId' element={<Productdetail/>}/>  
-              <Route path = '/cart' element = {<Cart/>}/>
-              <Route path = '/register' element = {<Register/>}/>
-               <Route path = '/context' element = {<Show/>}/>
-            </Route>  
+          {/* Layout needs to wrap the pages so layout bitra pages haru ko routes rakhnu */}
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Homepage />} />
+            <Route path="/product" element={<Productpage />} />
+            <Route
+              path="/productdetails/:productId"
+              element={<Productdetail />}
+            />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/context" element={<Show />} />
+            <Route path="/redux/cart" element={<Cartitem/>} />
+          </Route>
         </Routes>
-    </Router>
+      </Router>
     </>
-  )
+  );
 }
 
 export default Myroute
