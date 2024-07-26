@@ -5,12 +5,14 @@ import './App.css';
 // import Header from './component/Header';
 // import Footer from './component/Footer';
 import Myroute from './Myroute';
-import {legacy_createStore} from 'redux';
+// import {legacy_createStore} from 'redux';
 import {Provider} from 'react-redux';
 import cartFunction from './redux/reducer/cartFunction';
+import store from './store';
 // always write the components in uppercase otherwise casing error is shown when renamed
 function App() {
-  const store = legacy_createStore(cartFunction)
+  // const store = legacy_createStore(cartFunction)
+  // legacy le eutai matra data store garirako hunxa, so we will go to store.js and make a combined store using combinereducer
   return (
     // <> </> is a fragment required to use multiple queries
     <>
@@ -25,7 +27,8 @@ function App() {
      <Test/>
      <Demo/>
      <Header/> */}
-      <Provider store={store}> 
+      {/* need to wrap it in provider, makes the Redux store available to any nested components that need to access the Redux store.  */}
+      <Provider store={store}>
         <Myroute />
       </Provider>
     </>
